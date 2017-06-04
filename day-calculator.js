@@ -1,6 +1,5 @@
-//BUGGY CODE
 function calculateDayInYear(date) {
-  var splitDate = date.split('/');
+  var splitDate = date.split('/'); //2017
   var year = Number(splitDate[0]);
   var month = Number(splitDate[1]);
   var day = Number(splitDate[2]);
@@ -13,17 +12,21 @@ function calculateDayInYear(date) {
     console.log("Invalid date");
   }
 
+
+
   function validMonth(month) {
-    return month && month >= 1 && month < 12;
+    // changed third expression for
+    //month to also take into account December month
+    return month && month >= 1 && month <= 12;
   }
 
   function validDay(month, day) {
-    return day && day >= 1 && day < DAYS_IN_MONTH[month - 1];
+    return day && day >= 1 && day <= DAYS_IN_MONTH[month - 1];
   }
 
   function calculateDayNumber(month, day) {
-    var dayOfYear = 1;
-
+    //changed dayOfYear to equal day to start counting from that day
+    var dayOfYear = day;
     for (var i = 1; i < month; i++) {
       dayOfYear += DAYS_IN_MONTH[i - 1];
     }
@@ -32,7 +35,14 @@ function calculateDayInYear(date) {
   }
 
   function daysInFeb(year) {
-    return 28;
+    //added an if else statement to output correct
+    //feb days for year given
+    if (isLeapYear(year)) {
+      return 29;
+    } else {
+      return 28;
+    }
+
   }
 
   function isLeapYear(year) {
